@@ -1,0 +1,13 @@
+---
+- name: Download Symfony installer
+  shell: curl -LsS http://symfony.com/installer > symfony.phar
+  args:
+    chdir: /home/vagrant
+
+- name: Move Symfony installer to bin directory
+  command: mv /home/vagrant/symfony.phar /usr/local/bin/symfony
+  sudo: true
+
+- name: Set file permissions for Symfony installer
+  command: chmod a+x /usr/local/bin/symfony
+  sudo: true

@@ -1,0 +1,61 @@
+---
+- name: Install Apache HTTP server
+  apt:
+    pkg=apache2
+    state=installed
+    update_cache=true
+  notify:
+    - start apache
+
+- name: Set environment vars
+  template:
+    src=envvars
+    dest=/etc/apache2/envvars
+    owner=root
+    group=root
+    mode=0644
+  notify:
+    - restart apache
+
+- name: Create a VirtualHost file for VirtualHost
+  template:
+    src=apache_vhost.conf
+    dest=/etc/apache2/sites-available/{{ vhost_servername }}.conf
+    owner=root
+    group=root
+    mode=0644
+  notify:
+    - restart apache
+
+- name: Link source for VirtualHost
+  file:
+    src={{ vhost_sourceDir }}
+    dest=/var/www/{{ vhost_servername }}
+    owner=www-data
+    group=www-data
+    state=link
+
+- name: Create log directory for VirtualHost
+  file:
+    path=/var/log/apache2/{{ vhost_servername }}
+    owner=www-data
+    group=www-data
+    state=directory
+
+- name: Enable rewrite mod
+  apache2_module:
+    state=present
+    name=rewrite
+  notify:
+    - restart apache
+
+- name: Enable VirtualHost
+  command:
+    sudo a2ensite {{ vhost_servername }}.conf
+
+- name: Disable default VirtualHost
+  command:
+      sudo a2dissite 000-default.conf
+
+  notify:
+    - restart apache

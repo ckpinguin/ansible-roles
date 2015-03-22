@@ -1,0 +1,4 @@
+- name: Set locale module
+  locale_gen:
+    name={{ locale_name }}
+    state=present

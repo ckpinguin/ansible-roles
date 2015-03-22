@@ -1,0 +1,5 @@
+---
+vhost_serveradmin: "vagrant@localhost"
+vhost_relDestDir : "public"
+apache_user      : "vagrant"
+apache_group     : "vagrant"

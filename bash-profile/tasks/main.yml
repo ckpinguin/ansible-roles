@@ -1,0 +1,8 @@
+---
+- name: Set .bash_profile
+  template:
+    src=.bash_profile
+    dest=/home/vagrant/.bash_profile
+    owner=vagrant
+    group=vagrant
+    mode=0644

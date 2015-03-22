@@ -1,0 +1,8 @@
+---
+- name: Copy Git Configuration
+  copy:
+    src=~/.gitconfig
+    dest=/home/vagrant/.gitconfig
+    owner=vagrant
+    group=vagrant
+    force=yes
