@@ -1,0 +1,6 @@
+---
+- name: Install PHP 7.0 package
+  apt:
+    package=php7.0
+    state=installed
+    update_cache=yes

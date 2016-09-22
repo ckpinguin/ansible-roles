@@ -1,0 +1,6 @@
+---
+- name: Download Composer
+  script: composer-download.sh
+  
+- name: Install Composer globally
+  script: composer-install.sh
