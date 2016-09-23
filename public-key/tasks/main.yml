@@ -1,0 +1,5 @@
+---
+- name: Copy RSA public key
+  authorized_key:
+    user: vagrant
+    key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
