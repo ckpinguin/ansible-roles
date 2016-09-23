@@ -1,0 +1,6 @@
+---
+- name: Install MySQL client
+  apt:
+    package=mysql-client
+    state=installed
+    update_cache=yes
